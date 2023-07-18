@@ -1,0 +1,59 @@
+{
+  "name": "@niamori/rollup-config",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@8.6.8",
+  "author": "NiaMori <Hellc5261@gmail.com> (https://github.com/niamori)",
+  "license": "MIT",
+  "homepage": "https://github.com/niamori/rollup-config",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.mjs"
+    },
+    "./*": {
+      "import": "./dist/esm/*.mjs"
+    }
+  },
+  "main": "./dist/esm/index.mjs",
+  "module": "./dist/esm/index.mjs",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/esm/index.d.mts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "build": "rollup --config rollup.config.js",
+    "dev": "rollup --watch --config rollup.config.js",
+    "bump": "bumpp --no-push",
+    "release": "pnpm run bump && pnpm run build && npm publish"
+  },
+  "dependencies": {
+    "@niamori/utils": "^0.3.0",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "fast-glob": "^3.3.0",
+    "rollup": "^3.26.3",
+    "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-node-externals": "^6.1.1",
+    "rollup-plugin-tsconfig-paths": "^1.5.1",
+    "rxjs": "^7.8.1",
+    "ts-pattern": "^5.0.3",
+    "tsc-alias": "^1.8.7"
+  },
+  "devDependencies": {
+    "@niamori/eslint-config": "^0.0.2",
+    "@types/node": "^20.4.2",
+    "bumpp": "^9.1.1",
+    "bundle-require": "^4.0.1",
+    "eslint": "^8.45.0"
+  }
+}
