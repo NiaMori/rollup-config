@@ -89,7 +89,7 @@ export async function configRollup(fn: (sugar: RollupConfigSugar) => ObservableI
             dir,
             format: 'esm',
             sourcemap: isDevMode,
-            entryFileNames: '[name].mjs',
+            entryFileNames: '[name].js',
             plugins: [
               createTypescriptDtsPostProcessorPlugin({ declarationDir: dir }),
             ],

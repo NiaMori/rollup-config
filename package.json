@@ -8,18 +8,18 @@
   "homepage": "https://github.com/niamori/rollup-config",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs"
+      "import": "./dist/esm/index.js"
     },
     "./*": {
-      "import": "./dist/esm/*.mjs"
+      "import": "./dist/esm/*.js"
     }
   },
-  "main": "./dist/esm/index.mjs",
-  "module": "./dist/esm/index.mjs",
+  "main": "./dist/esm/index.js",
+  "module": "./dist/esm/index.js",
   "typesVersions": {
     "*": {
       ".": [
-        "./dist/esm/index.d.mts"
+        "./dist/esm/index.d.ts"
       ]
     }
   },
