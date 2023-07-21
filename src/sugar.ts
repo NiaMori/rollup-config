@@ -1,13 +1,12 @@
-import path from 'node:path'
-import process from 'node:process'
+import * as path from 'node:path'
+import * as process from 'node:process'
 import type { OutputOptions, Plugin, RollupOptions } from 'rollup'
 import fg from 'fast-glob'
-import createTypescriptPlugin from '@rollup/plugin-typescript'
 import type { ObservableInput } from 'rxjs'
 import { firstValueFrom, from, toArray } from 'rxjs'
 import { define } from '@niamori/utils'
 import { match } from 'ts-pattern'
-import { createTypescriptDtsPostProcessorPlugin } from '@/plugins'
+import { createTypescriptPlugin } from '@niamori/rollup-config/plugins'
 
 interface RollupConfigSugar {
   isDevMode: boolean
@@ -90,9 +89,6 @@ export async function configRollup(fn: (sugar: RollupConfigSugar) => ObservableI
             format: 'esm',
             sourcemap: isDevMode,
             entryFileNames: '[name].js',
-            plugins: [
-              createTypescriptDtsPostProcessorPlugin({ declarationDir: dir }),
-            ],
           }
         },
       },

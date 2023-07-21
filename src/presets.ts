@@ -1,11 +1,10 @@
-import fs from 'node:fs'
+import * as fs from 'node:fs'
 
-import { configRollup } from '@/sugar'
+import { configRollup } from '@niamori/rollup-config/sugar'
 import {
   createDtsPlugin,
   createNodeExternalsPlugin,
-  createTsConfigPathsPlugin,
-} from '@/plugins'
+} from '@niamori/rollup-config/plugins'
 
 export async function esm() {
   await fs.promises.rm('dist', { recursive: true, force: true })
@@ -16,7 +15,6 @@ export async function esm() {
       output: sugar.output.esm.bundless(),
       plugins: [
         createNodeExternalsPlugin(),
-        createTsConfigPathsPlugin(),
         sugar.plugin.ts(),
       ],
     }
@@ -32,7 +30,6 @@ export async function cjs() {
       output: sugar.output.cjs.bundle(),
       plugins: [
         createNodeExternalsPlugin(),
-        createTsConfigPathsPlugin(),
         sugar.plugin.ts({ declaration: false }),
       ],
     }
@@ -41,7 +38,6 @@ export async function cjs() {
       input: 'src/index.ts',
       output: sugar.output.cjs.dtsBundle(),
       plugins: [
-        createTsConfigPathsPlugin(),
         createDtsPlugin(),
       ],
     }

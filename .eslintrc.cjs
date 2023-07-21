@@ -6,4 +6,7 @@ require('node:process').env.ESLINT_TSCONFIG = path.resolve(__dirname, 'tsconfig.
 module.exports = {
   root: true,
   extends: '@niamori/eslint-config',
+  rules: {
+    '@typescript-eslint/no-require-imports': 'off',
+  },
 }

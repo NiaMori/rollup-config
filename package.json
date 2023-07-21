@@ -8,18 +8,20 @@
   "homepage": "https://github.com/niamori/rollup-config",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js"
+      "import": "./dist/esm/src/index.js"
     },
     "./*": {
-      "import": "./dist/esm/*.js"
+      "dev:@niamori/rollup-config": "./src/*.js",
+      "import": "./dist/esm/src/*.js"
     }
   },
-  "main": "./dist/esm/index.js",
-  "module": "./dist/esm/index.js",
+  "main": "./dist/esm/src/index.js",
+  "module": "./dist/esm/src/index.js",
+  "types": "index.d.ts",
   "typesVersions": {
     "*": {
-      ".": [
-        "./dist/esm/index.d.ts"
+      "*": [
+        "./dist/esm/src/*"
       ]
     }
   },
@@ -32,8 +34,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "build": "rollup --config rollup.config.js",
-    "dev": "rollup --watch --config rollup.config.js",
+    "build": "rm -rf dist && tsc --noEmit false --outDir dist/esm --declaration",
+    "dev": "rm -rf dist && tsc --noEmit false --outDir dist/esm --sourcemap --declaration --declarationMap --watch",
     "bump": "bumpp --no-push",
     "release": "pnpm run bump && pnpm run build && npm publish"
   },

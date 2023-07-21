@@ -1,1 +1,1 @@
-export * from './sugar'
+export * from '@niamori/rollup-config/sugar'

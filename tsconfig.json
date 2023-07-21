@@ -3,22 +3,21 @@
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": false,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "noEmit": true,
 
-    "paths": {
-      "@/*": ["./src/*"]
-    },
+    "rootDir": ".",
 
     "target": "ESNext",
     "lib": ["ESNext"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "customConditions": ["dev:@niamori/rollup-config"],
     "types": ["node"]
   },
 
-  "include": ["src", "rollup.config.ts"]
+  "include": ["src"]
 }
