@@ -8,7 +8,7 @@
 // rollup.config.ts
 
 import { defineConfig } from 'rollup'
-import { dual, esm, cjs } from '@niamori/rollup-config/presets'
+import { esm } from '@niamori/rollup-config/presets'
 
-export default defineConfig(await dual())
+export default defineConfig(await esm())
 ```

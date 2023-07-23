@@ -1,4 +1,3 @@
-import * as path from 'node:path'
 import * as process from 'node:process'
 import type { OutputOptions, Plugin, RollupOptions } from 'rollup'
 import fg from 'fast-glob'
@@ -18,11 +17,6 @@ interface RollupConfigSugar {
   }
 
   output: {
-    cjs: {
-      bundle: (props?: { file?: string }) => OutputOptions
-      dtsBundle: (props?: { file?: string }) => OutputOptions
-    }
-
     esm: {
       bundless: (props?: { dir?: string }) => OutputOptions
     }
@@ -51,35 +45,14 @@ export async function configRollup(fn: (sugar: RollupConfigSugar) => ObservableI
 
     input: {
       tsEntries() {
-        return Object.fromEntries(fg.sync(['**/!(*.d).ts'], { cwd: 'src', absolute: true }).map(file => [
-          path.relative('src', file.slice(0, file.length - path.extname(file).length)),
-          file,
-        ]))
+        return Object.fromEntries(
+          fg.sync(['src/**/!(*.d).ts'])
+            .map(file => [file.replace(/\.ts$/, ''), file]),
+        )
       },
     },
 
     output: {
-      cjs: {
-        bundle(props = {}) {
-          const { file = 'dist/cjs/index.cjs' } = props
-
-          return {
-            file,
-            format: 'cjs',
-            sourcemap: isDevMode,
-          }
-        },
-
-        dtsBundle(props = {}) {
-          const { file = 'dist/cjs/index.d.cts' } = props
-
-          return {
-            file,
-            format: 'cjs',
-          }
-        },
-      },
-
       esm: {
         bundless(props = {}) {
           const { dir = 'dist/esm' } = props
@@ -88,7 +61,6 @@ export async function configRollup(fn: (sugar: RollupConfigSugar) => ObservableI
             dir,
             format: 'esm',
             sourcemap: isDevMode,
-            entryFileNames: '[name].js',
           }
         },
       },
