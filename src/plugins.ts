@@ -7,6 +7,13 @@
 */
 import createTypescriptPluginCjsMod = require('@rollup/plugin-typescript')
 
+/**
+ * same masquerading as cjs issue as `@rollup/plugin-typescript`
+ * @see createTypescriptPluginCjsMod
+ */
+import createReplacePluginCjsMod = require('@rollup/plugin-replace')
+
 export const createTypescriptPlugin = createTypescriptPluginCjsMod.default
+export const createReplacePlugin = createReplacePluginCjsMod.default
 
 export { default as createNodeExternalsPlugin } from 'rollup-plugin-node-externals'
