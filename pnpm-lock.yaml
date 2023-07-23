@@ -23,9 +23,6 @@ dependencies:
   rollup-plugin-node-externals:
     specifier: ^6.1.1
     version: 6.1.1(rollup@3.26.3)
-  rollup-plugin-tsconfig-paths:
-    specifier: ^1.5.1
-    version: 1.5.1(rollup@3.26.3)(typescript@5.1.6)
   rxjs:
     specifier: ^7.8.1
     version: 7.8.1
@@ -2798,17 +2795,6 @@ packages:
       rollup: 3.26.3
     dev: false
 
-  /rollup-plugin-tsconfig-paths@1.5.1(rollup@3.26.3)(typescript@5.1.6):
-    resolution: {integrity: sha512-HhqSvheeEdSQY/X1gMj7MBccx9BE4FbzIaCrRpOqNc9OwvbqbTf1WOUY56bGW4nJ3OWLOuzaBFJFle9LeRmXIg==}
-    peerDependencies:
-      rollup: ^2 || ^3
-    dependencies:
-      rollup: 3.26.3
-      typescript-paths: 1.5.1(typescript@5.1.6)
-    transitivePeerDependencies:
-      - typescript
-    dev: false
-
   /rollup@3.26.3:
     resolution: {integrity: sha512-7Tin0C8l86TkpcMtXvQu6saWH93nhG3dGQ1/+l5V2TDMceTxO7kDiK6GzbfLWNNxqJXm591PcEZUozZm51ogwQ==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
@@ -3185,14 +3171,6 @@ packages:
       type-fest: 3.13.1
       zod: 3.21.4
     dev: true
-
-  /typescript-paths@1.5.1(typescript@5.1.6):
-    resolution: {integrity: sha512-lYErSLCON2MSplVV5V/LBgD4UNjMgY3guATdFCZY2q1Nr6OZEu4q6zX/rYMsG1TaWqqQSszg6C9EU7AGWMDrIw==}
-    peerDependencies:
-      typescript: ^4.7.2 || ^5
-    dependencies:
-      typescript: 5.1.6
-    dev: false
 
   /typescript@5.1.6:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}

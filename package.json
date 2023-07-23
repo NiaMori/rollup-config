@@ -48,7 +48,6 @@
     "rollup": "^3.26.3",
     "rollup-plugin-dts": "^5.3.0",
     "rollup-plugin-node-externals": "^6.1.1",
-    "rollup-plugin-tsconfig-paths": "^1.5.1",
     "rxjs": "^7.8.1",
     "ts-pattern": "^5.0.3",
     "tsc-alias": "^1.8.7"
