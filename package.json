@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@niamori/utils": "^0.3.0",
+    "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-typescript": "^11.1.2",
     "fast-glob": "^3.3.0",
     "rollup": "^3.26.3",
