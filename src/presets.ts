@@ -1,7 +1,12 @@
 import * as fs from 'node:fs'
 
 import { configRollup } from '@niamori/rollup-config/sugar'
-import { createNodeExternalsPlugin, createReplacePlugin } from '@niamori/rollup-config/plugins'
+import {
+  createEsbuildPlugin,
+  createNodeExternalsPlugin,
+  createReplacePlugin,
+  createTsconfigPathsPlugin,
+} from '@niamori/rollup-config/plugins'
 
 export async function esmLib() {
   await fs.promises.rm('dist', { recursive: true, force: true })
@@ -25,6 +30,22 @@ export async function esmLib() {
           preventAssignment: true,
         }),
         sugar.plugin.ts(),
+      ],
+    }
+  })
+}
+
+export async function cjsApp() {
+  await fs.promises.rm('dist', { recursive: true, force: true })
+
+  return configRollup(async function* (sugar) {
+    yield {
+      input: sugar.input.tsEntries(),
+      output: sugar.output.cjs.bundless(),
+      plugins: [
+        createNodeExternalsPlugin(),
+        createTsconfigPathsPlugin(),
+        createEsbuildPlugin(),
       ],
     }
   })

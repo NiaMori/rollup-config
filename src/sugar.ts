@@ -20,6 +20,9 @@ interface RollupConfigSugar {
     esm: {
       bundless: (props?: { dir?: string }) => OutputOptions
     }
+    cjs: {
+      bundless: (props?: { dir?: string }) => OutputOptions
+    }
   }
 
   plugin: {
@@ -60,6 +63,18 @@ export async function configRollup(fn: (sugar: RollupConfigSugar) => ObservableI
           return {
             dir,
             format: 'esm',
+            sourcemap: isDevMode,
+          }
+        },
+      },
+
+      cjs: {
+        bundless(props = {}) {
+          const { dir = 'dist/cjs' } = props
+
+          return {
+            dir,
+            format: 'cjs',
             sourcemap: isDevMode,
           }
         },
