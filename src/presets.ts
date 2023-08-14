@@ -3,10 +3,10 @@ import * as fs from 'node:fs'
 import { configRollup } from '@niamori/rollup-config/sugar'
 import { createNodeExternalsPlugin, createReplacePlugin } from '@niamori/rollup-config/plugins'
 
-export async function esm() {
+export async function esmLib() {
   await fs.promises.rm('dist', { recursive: true, force: true })
 
-  return configRollup(async function *(sugar) {
+  return configRollup(async function* (sugar) {
     yield {
       input: sugar.input.tsEntries(),
       output: sugar.output.esm.bundless(),

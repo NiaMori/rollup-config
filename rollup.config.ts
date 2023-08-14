@@ -34,6 +34,6 @@ const { mod } = await bundleRequire({
   },
 })
 
-const { esm } = mod as typeof import('@niamori/rollup-config/presets')
+const { esmLib } = mod as typeof import('@niamori/rollup-config/presets')
 
-export default defineConfig(async () => await esm())
+export default defineConfig(async () => await esmLib())
