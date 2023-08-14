@@ -5,19 +5,19 @@
  * we have to use the cjs version util the issue is fixed
  * @see https://github.com/rollup/plugins/issues/1541
 */
-import createTypescriptPluginCjsMod = require('@rollup/plugin-typescript')
+import typescriptPluginCjsMod = require('@rollup/plugin-typescript')
 
 /**
  * same masquerading as cjs issue as `@rollup/plugin-typescript`
- * @see createTypescriptPluginCjsMod
+ * @see typescriptPluginCjsMod
  */
-import createReplacePluginCjsMod = require('@rollup/plugin-replace')
+import replacePluginCjsMod = require('@rollup/plugin-replace')
 
 import esbuildPluginCjsMod = require('rollup-plugin-esbuild')
 import tsconfigPathsCjsMod = require('rollup-plugin-tsconfig-paths')
 
-export const createTypescriptPlugin = createTypescriptPluginCjsMod.default
-export const createReplacePlugin = createReplacePluginCjsMod.default
+export const createTypescriptPlugin = typescriptPluginCjsMod.default
+export const createReplacePlugin = replacePluginCjsMod.default
 export const createEsbuildPlugin = esbuildPluginCjsMod.default
 export const createTsconfigPathsPlugin = tsconfigPathsCjsMod.default
 
