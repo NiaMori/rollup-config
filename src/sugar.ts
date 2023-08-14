@@ -23,7 +23,7 @@ interface RollupConfigSugar {
   }
 
   plugin: {
-    ts (props?: {
+    ts(props?: {
       declaration: false
     } | {
       declaration?: true
