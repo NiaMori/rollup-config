@@ -12,15 +12,14 @@ import typescriptPluginCjsMod = require('@rollup/plugin-typescript')
  * @see typescriptPluginCjsMod
  */
 import replacePluginCjsMod = require('@rollup/plugin-replace')
-
 import esbuildPluginCjsMod = require('rollup-plugin-esbuild')
-import tsconfigPathsCjsMod = require('rollup-plugin-tsconfig-paths')
+import tsconfigPathsPluginCjsMod = require('rollup-plugin-tsconfig-paths')
 import runPluginCjsMod = require('@rollup/plugin-run')
 
 export const createTypescriptPlugin = typescriptPluginCjsMod.default
 export const createReplacePlugin = replacePluginCjsMod.default
 export const createEsbuildPlugin = esbuildPluginCjsMod.default
-export const createTsconfigPathsPlugin = tsconfigPathsCjsMod.default
+export const createTsconfigPathsPlugin = tsconfigPathsPluginCjsMod.default
 export const createRunPlugin = runPluginCjsMod.default
 
 export { default as createNodeExternalsPlugin } from 'rollup-plugin-node-externals'
