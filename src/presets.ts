@@ -5,6 +5,7 @@ import {
   createEsbuildPlugin,
   createNodeExternalsPlugin,
   createReplacePlugin,
+  createRunPlugin,
   createTsconfigPathsPlugin,
 } from '@niamori/rollup-config/plugins'
 import { readTSConfig } from 'pkg-types'
@@ -50,8 +51,10 @@ export async function esmLib() {
   })
 }
 
-export async function cjsApp() {
+export async function cjsApp(props: { autoRun?: boolean } = {}) {
   await fs.promises.rm('dist', { recursive: true, force: true })
+
+  const { autoRun = true } = props
 
   const tsconfig = await readTSConfig()
 
@@ -75,6 +78,7 @@ export async function cjsApp() {
         createNodeExternalsPlugin(),
         createTsconfigPathsPlugin(),
         createEsbuildPlugin(),
+        autoRun && sugar.isDevMode && createRunPlugin(),
       ],
     }
   })
