@@ -3,9 +3,9 @@ import * as fs from 'node:fs'
 import { configRollup } from '@niamori/rollup-config/sugar'
 import {
   createEsbuildPlugin,
+  createNiaMoriRunIndexPlugin,
   createNodeExternalsPlugin,
   createReplacePlugin,
-  createRunPlugin,
   createTsconfigPathsPlugin,
 } from '@niamori/rollup-config/plugins'
 import { readTSConfig } from 'pkg-types'
@@ -78,7 +78,7 @@ export async function cjsApp(props: { autoRun?: boolean } = {}) {
         createNodeExternalsPlugin(),
         createTsconfigPathsPlugin(),
         createEsbuildPlugin(),
-        autoRun && sugar.isDevMode && createRunPlugin(),
+        autoRun && sugar.isDevMode && createNiaMoriRunIndexPlugin(),
       ],
     }
   })

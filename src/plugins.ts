@@ -1,3 +1,8 @@
+import path from 'node:path'
+import type { ChildProcess } from 'node:child_process'
+import { fork } from 'node:child_process'
+import type { Plugin } from 'rollup'
+
 /**
  * the esm exports of `@rollup/plugin-typescript` is [Masquerading as CJS](https://github.com/arethetypeswrong/arethetypeswrong.github.io/blob/main/docs/problems/FalseCJS.md)
  * @see https://arethetypeswrong.github.io/?p=@rollup/plugin-typescript@11.1.2
@@ -14,12 +19,36 @@ import typescriptPluginCjsMod = require('@rollup/plugin-typescript')
 import replacePluginCjsMod = require('@rollup/plugin-replace')
 import esbuildPluginCjsMod = require('rollup-plugin-esbuild')
 import tsconfigPathsPluginCjsMod = require('rollup-plugin-tsconfig-paths')
-import runPluginCjsMod = require('@rollup/plugin-run')
 
 export const createTypescriptPlugin = typescriptPluginCjsMod.default
 export const createReplacePlugin = replacePluginCjsMod.default
 export const createEsbuildPlugin = esbuildPluginCjsMod.default
 export const createTsconfigPathsPlugin = tsconfigPathsPluginCjsMod.default
-export const createRunPlugin = runPluginCjsMod.default
 
 export { default as createNodeExternalsPlugin } from 'rollup-plugin-node-externals'
+
+export function createNiaMoriRunIndexPlugin(): Plugin {
+  const childProcessRef = { current: null as null | ChildProcess }
+
+  return {
+    name: '@/plugin.run-index',
+
+    writeBundle(outputOptions, bundle) {
+      const distDir = outputOptions.dir || path.dirname(outputOptions.file!)
+
+      for (const [fileName, chunk] of Object.entries(bundle)) {
+        if ('isEntry' in chunk && chunk.isEntry && chunk.facadeModuleId === path.resolve('src/index.ts')) {
+          const entryFilePath = path.join(distDir, fileName)
+
+          if (childProcessRef.current) {
+            childProcessRef.current.kill()
+          }
+
+          childProcessRef.current = fork(entryFilePath)
+
+          break
+        }
+      }
+    },
+  }
+}
