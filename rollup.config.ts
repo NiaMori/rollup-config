@@ -32,8 +32,8 @@ const { mod } = await bundleRequire({
       js: 'const require = await import("module").then(it => it.createRequire(import.meta.url));',
     },
   },
-})
+}) as { mod: typeof import('@niamori/rollup-config/presets') }
 
-const { esmLib } = mod as typeof import('@niamori/rollup-config/presets')
+const { esmLib } = mod
 
 export default defineConfig(async () => await esmLib())

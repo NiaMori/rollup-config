@@ -9,7 +9,7 @@ import type { Plugin } from 'rollup'
  *
  * we have to use the cjs version util the issue is fixed
  * @see https://github.com/rollup/plugins/issues/1541
-*/
+ */
 import typescriptPluginCjsMod = require('@rollup/plugin-typescript')
 
 /**

@@ -1,4 +1,3 @@
-import * as process from 'node:process'
 import type { OutputOptions, Plugin, RollupOptions } from 'rollup'
 import fg from 'fast-glob'
 import type { ObservableInput } from 'rxjs'
