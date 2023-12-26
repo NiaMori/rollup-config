@@ -8,24 +8,9 @@ import {
   createReplacePlugin,
   createTsconfigPathsPlugin,
 } from '@niamori/rollup-config/plugins'
-import { readTSConfig } from 'pkg-types'
 
 export async function esmLib() {
   await fs.promises.rm('dist', { recursive: true, force: true })
-
-  const tsconfig = await readTSConfig()
-
-  if (tsconfig?.compilerOptions?.module.toLowerCase() !== 'nodenext') {
-    throw new Error(
-      'The `compilerOptions.module` of tsconfig.json must be "NodeNext" for esmLib',
-    )
-  }
-
-  if (tsconfig?.compilerOptions?.moduleResolution.toLowerCase() !== 'nodenext') {
-    throw new Error(
-      'The `compilerOptions.moduleResolution` of tsconfig.json must be "NodeNext" for esmLib',
-    )
-  }
 
   return configRollup(async function* (sugar) {
     yield {
@@ -55,20 +40,6 @@ export async function cjsApp(props: { autoRun?: boolean } = {}) {
   await fs.promises.rm('dist', { recursive: true, force: true })
 
   const { autoRun = true } = props
-
-  const tsconfig = await readTSConfig()
-
-  if (tsconfig?.compilerOptions?.module.toLowerCase() !== 'commonjs') {
-    throw new Error(
-      'The `compilerOptions.module` of tsconfig.json must be "CommonJs" for cjsApp',
-    )
-  }
-
-  if (tsconfig?.compilerOptions?.moduleResolution.toLowerCase() !== 'node') {
-    throw new Error(
-      'The `compilerOptions.moduleResolution` of tsconfig.json must be "Node" for cjsApp',
-    )
-  }
 
   return configRollup(async function* (sugar) {
     yield {
