@@ -9,6 +9,24 @@ import {
   createTsconfigPathsPlugin,
 } from '@niamori/rollup-config/plugins'
 
+export async function esmApp(props: { autoRun?: boolean } = {}) {
+  await fs.promises.rm('dist', { recursive: true, force: true })
+
+  const { autoRun = true } = props
+
+  return configRollup(async function* (sugar) {
+    yield {
+      input: sugar.input.tsEntries(),
+      output: sugar.output.esm.bundless(),
+      plugins: [
+        createNodeExternalsPlugin(),
+        sugar.plugin.ts({ declaration: false }),
+        autoRun && sugar.isDevMode && createNiaMoriRunIndexPlugin(),
+      ],
+    }
+  })
+}
+
 export async function esmLib() {
   await fs.promises.rm('dist', { recursive: true, force: true })
 
