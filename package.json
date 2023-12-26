@@ -39,7 +39,7 @@
     "build": "rollup --config rollup.config.ts --configPlugin typescript",
     "dev": "rollup --config rollup.config.ts --configPlugin typescript --watch",
     "bump": "bumpp --no-push",
-    "release": "pnpm run bump && pnpm run build && npm publish"
+    "release": "pnpm run bump && pnpm run build && pnpm publish"
   },
   "dependencies": {
     "@niamori/utils": "^0.3.0",
