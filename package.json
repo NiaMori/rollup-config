@@ -58,12 +58,12 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@niamori/eslint-config": "^0.0.2",
+    "@niamori/eslint-config": "^0.1.1",
     "@niamori/json-manipulator": "^0.0.2",
     "@types/node": "^20.4.2",
     "bumpp": "^9.1.1",
     "bundle-require": "^4.0.1",
-    "eslint": "^8.45.0",
+    "eslint": "^8.56.0",
     "tempy": "^3.1.0"
   }
 }
