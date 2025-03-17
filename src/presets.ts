@@ -8,7 +8,7 @@ import {
 } from '@niamori/rollup-config/plugins'
 
 export async function esmLib(props: { autoRun?: boolean, declaration?: boolean } = {}) {
-  const { autoRun = true, declaration = true } = props
+  const { autoRun = false, declaration = true } = props
 
   return configRollup(async function* (sugar) {
     yield {
