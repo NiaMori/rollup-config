@@ -1,6 +1,6 @@
 import type { OutputOptions, Plugin, RollupOptions } from 'rollup'
 import fg from 'fast-glob'
-import type { ObservableInput } from 'rxjs'
+import { type ObservableInput } from 'rxjs/internal/types'
 import { firstValueFrom, from, toArray } from 'rxjs'
 import { define } from '@niamori/utils'
 import { match } from 'ts-pattern'
@@ -48,8 +48,8 @@ export async function configRollup(fn: (sugar: RollupConfigSugar) => ObservableI
     input: {
       tsEntries() {
         return Object.fromEntries(
-          fg.sync(['src/**/!(*.d).ts'])
-            .map(file => [file.replace(/\.ts$/, ''), file]),
+          fg.sync(['src/**/!(*.d).{ts,tsx}'])
+            .map(file => [file.replace(/\.tsx?$/, ''), file]),
         )
       },
     },
@@ -85,12 +85,14 @@ export async function configRollup(fn: (sugar: RollupConfigSugar) => ObservableI
         return match(props)
           .with({ declaration: false }, () => {
             return createTypescriptPlugin({
-              include: ['src/**/*.ts'],
+              include: ['src/**/*.ts', 'src/**/*.tsx'],
               compilerOptions: {
                 declaration: false,
               },
+              outputToFilesystem: true
             })
           })
+          .narrow()
           .otherwise((props) => {
             const {
               declarationMap = isDevMode,
@@ -98,12 +100,13 @@ export async function configRollup(fn: (sugar: RollupConfigSugar) => ObservableI
             } = props
 
             return createTypescriptPlugin({
-              include: ['src/**/*.ts'],
+              include: ['src/**/*.ts', 'src/**/*.tsx'],
               compilerOptions: {
                 declaration: true,
                 declarationMap,
                 declarationDir,
               },
+              outputToFilesystem: true
             })
           })
       },
