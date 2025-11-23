@@ -1,7 +1,7 @@
 {
   "name": "@niamori/rollup-config",
   "type": "module",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "packageManager": "pnpm@10.23.0",
   "author": "NiaMori <Hellc5261@gmail.com> (https://github.com/niamori)",
   "license": "MIT",
